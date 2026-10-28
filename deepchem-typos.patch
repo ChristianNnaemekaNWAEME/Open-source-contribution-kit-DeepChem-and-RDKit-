@@ -1,0 +1,187 @@
+diff --git a/deepchem/data/datasets.py b/deepchem/data/datasets.py
+--- a/deepchem/data/datasets.py	2026-10-28 18:26:18.481365500 -0500
++++ b/deepchem/data/datasets.py	2026-10-28 18:26:18.484431988 -0500
+@@ -40,7 +40,7 @@
+     -------
+     X_sparse: np.ndarray
+         A numpy array with `dtype=object` where `X_sparse[i]` is a
+-        typle of `(nonzero_inds, nonzero_vals)` with nonzero indices and
++        tuple of `(nonzero_inds, nonzero_vals)` with nonzero indices and
+         values in the i-th sample of `X`.
+     """
+     n_samples = len(X)
+@@ -1222,7 +1222,7 @@
+         if len(self.metadata_df.columns) == 4 and list(
+                 self.metadata_df.columns) == ['ids', 'X', 'y', 'w']:
+             logger.info(
+-                "Detected legacy metatadata on disk. You can upgrade from legacy metadata "
++                "Detected legacy metadata on disk. You can upgrade from legacy metadata "
+                 "to the more efficient current metadata by resharding this dataset "
+                 "by calling the reshard() method of this object.")
+             self.legacy_metadata = True
+@@ -1819,7 +1819,7 @@
+             If True, use multiple processes to transform the dataset in parallel.
+         out_dir: str, optional (default None)
+             The directory to save the new dataset in. If this is omitted, a
+-            temporary directory is created automaticall.
++            temporary directory is created automatically.
+ 
+         Returns
+         -------
+@@ -2341,11 +2341,11 @@
+         ----------
+         X: np.ndarray
+             Feature array.
+-        y: np.ndarray, optioanl (default None)
++        y: np.ndarray, optional (default None)
+             Labels array.
+-        w: np.ndarray, optioanl (default None)
++        w: np.ndarray, optional (default None)
+             Weights array.
+-        ids: np.ndarray, optioanl (default None)
++        ids: np.ndarray, optional (default None)
+             Identifiers array.
+         """
+         metadata_rows = self.metadata_df.values.tolist()
+@@ -2371,11 +2371,11 @@
+             Shard index for shard to set new data.
+         X: np.ndarray
+             Feature array.
+-        y: np.ndarray, optioanl (default None)
++        y: np.ndarray, optional (default None)
+             Labels array.
+-        w: np.ndarray, optioanl (default None)
++        w: np.ndarray, optional (default None)
+             Weights array.
+-        ids: np.ndarray, optioanl (default None)
++        ids: np.ndarray, optional (default None)
+             Identifiers array.
+         """
+         basename = "shard-%d" % shard_num
+@@ -2689,7 +2689,7 @@
+                     ids_shape[0] += shard_ids_shape[0]
+             return tuple(X_shape), tuple(y_shape), tuple(w_shape), tuple(
+                 ids_shape)
+-        # In absense of shape metadata, fall back to loading data from disk to
++        # In absence of shape metadata, fall back to loading data from disk to
+         # find shape.
+         else:
+             for shard_num, (X, y, w, ids) in enumerate(self.itershards()):
+diff --git a/deepchem/feat/molecule_featurizers/rdkit_descriptors.py b/deepchem/feat/molecule_featurizers/rdkit_descriptors.py
+--- a/deepchem/feat/molecule_featurizers/rdkit_descriptors.py	2026-10-28 18:26:18.481067601 -0500
++++ b/deepchem/feat/molecule_featurizers/rdkit_descriptors.py	2026-10-28 18:26:18.484283242 -0500
+@@ -80,7 +80,7 @@
+         Notes
+         -----
+         * If both `labels_only` and `is_normalized` are True, then `is_normalized` takes
+-            precendence and `labels_only` will not be applied.
++            precedence and `labels_only` will not be applied.
+ 
+         """
+         try:
+diff --git a/deepchem/metrics/score_function.py b/deepchem/metrics/score_function.py
+--- a/deepchem/metrics/score_function.py	2026-10-28 18:26:18.481330001 -0500
++++ b/deepchem/metrics/score_function.py	2026-10-28 18:26:18.484359053 -0500
+@@ -192,7 +192,7 @@
+     Parameters
+     ----------
+     y_true: np.ndarray
+-        continous value
++        continuous value
+     y_pred: np.ndarray
+         Predicted value
+ 
+diff --git a/deepchem/splits/splitters.py b/deepchem/splits/splitters.py
+--- a/deepchem/splits/splitters.py	2026-10-28 18:26:18.480454705 -0500
++++ b/deepchem/splits/splitters.py	2026-10-28 18:26:18.483911439 -0500
+@@ -743,7 +743,7 @@
+             Each indices is a numpy array.
+         """
+         # JSG Assert that split fractions can be written as proper fractions over 10.
+-        # This can be generalized in the future with some common demoninator determination.
++        # This can be generalized in the future with some common denominator determination.
+         # This will work for 80/20 train/test or 80/10/10 train/valid/test (most use cases).
+         np.testing.assert_equal(frac_train + frac_valid + frac_test, 1.)
+         np.testing.assert_equal(
+@@ -1281,7 +1281,7 @@
+     They are essentially that part of the molecule consisting of
+     rings and the linker atoms between them.
+ 
+-    Paramters
++    Parameters
+     ---------
+     smiles: str
+         SMILES
+diff --git a/deepchem/trans/transformers.py b/deepchem/trans/transformers.py
+--- a/deepchem/trans/transformers.py	2026-10-28 18:26:18.481534570 -0500
++++ b/deepchem/trans/transformers.py	2026-10-28 18:26:18.484690051 -0500
+@@ -254,7 +254,7 @@
+         Array of values for which transformations have to be undone.
+     transformers: list[dc.trans.Transformer]
+         List of transformations which have already been applied to `y` in the
+-        order specifed.
++        order specified.
+ 
+     Returns
+     -------
+@@ -1102,15 +1102,15 @@
+             Transformed array of ids
+         """
+         ids = np.repeat(ids, [len(i) for i in X],
+-                        axis=0)  # each fragment should recieve parent mol id
++                        axis=0)  # each fragment should receive parent mol id
+         if self.transform_y:
+             y = np.repeat(
+                 y, [len(i) for i in X], axis=0
+-            )  # for consistency of shapes each fragment should recieve parent mol y
++            )  # for consistency of shapes each fragment should receive parent mol y
+         if self.transform_w:
+             w = np.repeat(
+                 w, [len(i) for i in X], axis=0
+-            )  # for consistency of shapes each fragment should recieve parent mol w
++            )  # for consistency of shapes each fragment should receive parent mol w
+         X = np.array([j for i in X for j in i])  # flatten
+         return (X, y, w, ids)
+ 
+@@ -1877,7 +1877,7 @@
+             atoms_indicator[count] = radial
+             # recording number of radial propagation steps
+             while not np.all(atoms_indicator):
+-                # in the fisrt loop, atoms directly connected to `count` will be added
++                # in the first loop, atoms directly connected to `count` will be added
+                 # into the DAG(radial=0), then atoms two-bond away from `count`
+                 # will be added in the second loop(radial=1).
+                 # atoms i-bond away will be added in i-th loop
+diff --git a/deepchem/utils/evaluate.py b/deepchem/utils/evaluate.py
+--- a/deepchem/utils/evaluate.py	2026-10-28 18:26:18.481499544 -0500
++++ b/deepchem/utils/evaluate.py	2026-10-28 18:26:18.484522342 -0500
+@@ -384,7 +384,7 @@
+             weights). The "correct" way to create this generator is to use
+             `model.default_generator` as shown in the example above.
+         transformers: List[Transformer]
+-            Tranformers to "undo" when applied to the models outputs
++            Transformers to "undo" when applied to the models outputs
+         labels: list of Layer
+             layers which are keys in the generator to compare to outputs
+         weights: list of Layer
+diff --git a/docs/source/get_started/tutorials.rst b/docs/source/get_started/tutorials.rst
+--- a/docs/source/get_started/tutorials.rst	2026-10-28 18:26:18.481814584 -0500
++++ b/docs/source/get_started/tutorials.rst	2026-10-28 18:26:18.484954593 -0500
+@@ -136,7 +136,7 @@
+    >>> len(test_dataset)
+    1
+ 
+-Here, we've used the :code:`RandomSplitter` and splitted the data randomly
++Here, we've used the :code:`RandomSplitter` and split the data randomly
+ in the ratio of train:valid:test = 3:1:1. But, the random splitting sometimes
+ overestimates  model's performance, especially for small data or imbalance data.
+ Please be careful for model evaluation. The :code:`dc.splits` provides more methods
+@@ -175,7 +175,7 @@
+ 
+ .. doctest::
+ 
+-   >>> # initialze the metric
++   >>> # initialize the metric
+    >>> metric = dc.metrics.Metric(dc.metrics.mae_score)
+    >>> # evaluate the model
+    >>> train_score = model.evaluate(train_dataset, [metric])

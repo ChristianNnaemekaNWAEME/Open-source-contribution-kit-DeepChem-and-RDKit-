@@ -1,0 +1,137 @@
+diff --git a/Docs/Book/Cookbook.rst b/Docs/Book/Cookbook.rst
+--- a/Docs/Book/Cookbook.rst	2026-10-28 18:26:18.499469779 -0500
++++ b/Docs/Book/Cookbook.rst	2026-10-28 18:26:18.502197410 -0500
+@@ -2503,7 +2503,7 @@
+ 
+ .. testcode::
+ 
+-   # this includes addtional small ring torsion potentials
++   # this includes additional small ring torsion potentials
+    params = AllChem.srETKDGv3()
+ 
+    # this includes additional macrocycle ring torsion potentials and macrocycle-specific handles
+@@ -2554,7 +2554,7 @@
+    # Note this is only an illustrative example, hydrogens are not added before conformer generation to keep the indices apparent 
+    AllChem.EmbedMultipleConfs(mol, numConfs = 3 , params = params)
+ 
+-Both of these setters can be used to help sampling all kinds of molecules as the users see fit. Nevertheless, to facilitate using them in conformer generation of macrocycles, we devised the python package github.com/rinikerlab/cpeptools to provide chemcially intuitive bound matrices and CPCIs for macrocycles. Example usage cases are shown in the README.
++Both of these setters can be used to help sampling all kinds of molecules as the users see fit. Nevertheless, to facilitate using them in conformer generation of macrocycles, we devised the python package github.com/rinikerlab/cpeptools to provide chemically intuitive bound matrices and CPCIs for macrocycles. Example usage cases are shown in the README.
+ 
+ .. rubric:: References
+ 
+diff --git a/Docs/Book/GettingStartedInPython.rst b/Docs/Book/GettingStartedInPython.rst
+--- a/Docs/Book/GettingStartedInPython.rst	2026-10-28 18:26:18.499412490 -0500
++++ b/Docs/Book/GettingStartedInPython.rst	2026-10-28 18:26:18.502030461 -0500
+@@ -770,7 +770,7 @@
+ 
+ By default `AllChem.EmbedMultipleConfs` and `AllChem.MMFFOptimizeMoleculeConfs()`
+ run single threaded, but you can cause them to use
+-multiple threads simultaneously for these embarassingly parallel tasks
++multiple threads simultaneously for these embarrassingly parallel tasks
+ via the `numThreads` argument:
+ 
+ .. doctest::
+diff --git a/Docs/Book/RDKit_Book.rst b/Docs/Book/RDKit_Book.rst
+--- a/Docs/Book/RDKit_Book.rst	2026-10-28 18:26:18.499500564 -0500
++++ b/Docs/Book/RDKit_Book.rst	2026-10-28 18:26:18.502125177 -0500
+@@ -351,7 +351,7 @@
+   >>> m5 is None
+   True
+ 
+-The examples in this sectin all used the SMILES parser, but the SMARTS parser behaves the same way.
++The examples in this section all used the SMILES parser, but the SMARTS parser behaves the same way.
+ 
+ SMARTS Support and Extensions
+ =============================
+@@ -536,7 +536,7 @@
+ Mol/SDF Support and Extensions
+ ==============================
+ 
+-The RDKit covers an extensive subset of the features in the V2000 and V3000 CTAB specfication.
++The RDKit covers an extensive subset of the features in the V2000 and V3000 CTAB specification.
+ This subset should be better documented.
+ 
+ Here are the non-element atom queries that are supported:
+@@ -824,7 +824,7 @@
+       atom
+    6. Set the symbol of any double bond which has two identically ranked atoms
+       attached to either end [#eitherend]_ to the default for that bond
+-   7. If steps 5 and 6 modfied any atoms or bonds, loop back to step 4. 
++   7. If steps 5 and 6 modified any atoms or bonds, loop back to step 4. 
+    8. Add any potential stereogenic atom which does not have to identically 
+       ranked neighbors to the results 
+    9. Add any potential stereogenic atom which does not have two identically
+@@ -841,7 +841,7 @@
+ Potential stereocenters with no information provided are
+ ``ChiralType::CHI_UNSPECIFIED``.
+ 
+-Double-bond stereochemistry is specfied using ``/`` and ``\`` to indicate the
++Double-bond stereochemistry is specified using ``/`` and ``\`` to indicate the
+ directionality of the neighboring single bonds. Double bonds with no stereo
+ information provided are ``BondStereo::STEREONONE``. 
+ 
+@@ -1220,7 +1220,7 @@
+ ---------
+ 
+ This section describes how chirality information in the reaction
+-defition is handled. A consistent example, esterification of secondary
++definition is handled. A consistent example, esterification of secondary
+ alcohols, is used throughout [#chiralRxn]_.
+ 
+ If no chiral information is present in the reaction definition, the
+@@ -2951,7 +2951,7 @@
+ When converted to a full atomistic representation, each such hydrogen bond can represent up to 3 hydrogen bonds between the full-atomistic representations of 
+ the Base groups.  
+ 
+-The processing of H-bonds is contorlled by the ScsrBaseHbondOptions
++The processing of H-bonds is controlled by the ScsrBaseHbondOptions
+ member of the ScsrMolFileParserParams parameter.  The options are:
+ 
+  1. ScsrBaseHbondOptionsIgnore - if this is selected, all H-bonds are
+@@ -2982,7 +2982,7 @@
+ 
+     For pairs that have I (inosine) or something like it, the configuration must be
+     DA, so those two atoms form the two H bonds. The other side (C,U or A)
+-    has confiuration of AAD (C), ADA (U), or DAD (A). For C-type bases and
++    has configuration of AAD (C), ADA (U), or DAD (A). For C-type bases and
+     A type bases, the second and third atoms are used (AD), and for U
+     types, the first two atoms are used (AD).
+ 
+diff --git a/rdkit/Chem/AllChem.py b/rdkit/Chem/AllChem.py
+--- a/rdkit/Chem/AllChem.py	2026-10-28 18:26:18.499030925 -0500
++++ b/rdkit/Chem/AllChem.py	2026-10-28 18:26:18.501772969 -0500
+@@ -140,7 +140,7 @@
+       - confId1:    the id of the first conformer
+       - confId2:    the id of the second conformer
+       - atomIds:    (optional) list of atom ids to use a points for
+-                    alingment - defaults to all atoms
++                    alignment - defaults to all atoms
+       - prealigned: (optional) by default the conformers are assumed
+                     be unaligned and the second conformer be aligned
+                     to the first
+@@ -173,7 +173,7 @@
+     Arguments:
+       - mol:     the molecule
+       - atomIds: (optional) list of atom ids to use a points for
+-                 alingment - defaults to all atoms
++                 alignment - defaults to all atoms
+       - prealigned: (optional) by default the conformers are assumed
+                     be unaligned and will therefore be aligned to the
+                     first conformer
+diff --git a/rdkit/Chem/Descriptors.py b/rdkit/Chem/Descriptors.py
+--- a/rdkit/Chem/Descriptors.py	2026-10-28 18:26:18.498979567 -0500
++++ b/rdkit/Chem/Descriptors.py	2026-10-28 18:26:18.501583685 -0500
+@@ -304,11 +304,11 @@
+     Returns
+     -------
+     dict 
+-         A dictionary with decriptor names as keys and the descriptor values as values
++         A dictionary with descriptor names as keys and the descriptor values as values
+     '''
+   res = {}
+   for nm, fn in _descList:
+-    # some of the descriptor fucntions can throw errors if they fail, catch those here:
++    # some of the descriptor functions can throw errors if they fail, catch those here:
+     try:
+       val = fn(mol)
+     except:
