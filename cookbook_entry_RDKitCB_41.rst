@@ -1,7 +1,7 @@
 Scaffold Split for Train/Test Sets
 ===================================
 
-| **Author:** [ADD: your name]
+| **Author:** Christian N. Nwaeme
 | **Source:** Bemis, G. W.; Murcko, M. A. The Properties of Known Drugs. 1. Molecular Frameworks. *J. Med. Chem.* **1996**, 39, 2887-2893.
 | **Index ID#:** RDKitCB_41
 | **Summary:** Split a list of molecules into training and test sets so that molecules sharing a Bemis-Murcko scaffold always land on the same side of the split.
